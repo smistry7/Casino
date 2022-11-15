@@ -1,0 +1,31 @@
+containers:
+  dotnet-sdk-container:
+    image: mcr.microsoft.com/dotnet/sdk:6.0
+    ports:
+      - 5001:80
+    volumes:
+      - local: .
+        container: /code
+      - type: cache
+        name: nuget-cache
+        container: /root/.nuget/packages
+    working_directory: /code
+
+  sql-server-container:
+    build_directory: ./batect/sql-server
+    volumes:
+      - local: .
+        container: /code/
+        options: cached
+    working_directory: /code/.batect
+    ports:
+      - "8123:1433"
+
+tasks:
+  run-app:
+    description: run casino app
+    run:
+      container: dotnet-sdk-container
+      command: dotnet run
+    dependencies:
+      - sql-server-container

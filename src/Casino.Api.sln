@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.Api", "Casino.Api\Casino.Api.csproj", "{8DD15324-EA77-4891-A21D-06F1DD4F83FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.Core", "Casino.Core\Casino.Core.csproj", "{1280C383-6724-4060-BE18-0B1087416638}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.Domain", "Casino.Domain\Casino.Domain.csproj", "{821D1F64-CE22-4500-B399-0B2FCF43E2CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.DataAccess", "Casino.DataAccess\Casino.DataAccess.csproj", "{386324C4-7562-4338-82AB-318A56038EDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9E981C73-A020-4C3F-978C-E292EAE4928D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.UnitTests", "Casino.UnitTests\Casino.UnitTests.csproj", "{941FED2C-3872-4B90-8146-D55965AA75FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DD15324-EA77-4891-A21D-06F1DD4F83FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD15324-EA77-4891-A21D-06F1DD4F83FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD15324-EA77-4891-A21D-06F1DD4F83FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD15324-EA77-4891-A21D-06F1DD4F83FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1280C383-6724-4060-BE18-0B1087416638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1280C383-6724-4060-BE18-0B1087416638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1280C383-6724-4060-BE18-0B1087416638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1280C383-6724-4060-BE18-0B1087416638}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821D1F64-CE22-4500-B399-0B2FCF43E2CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821D1F64-CE22-4500-B399-0B2FCF43E2CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821D1F64-CE22-4500-B399-0B2FCF43E2CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821D1F64-CE22-4500-B399-0B2FCF43E2CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386324C4-7562-4338-82AB-318A56038EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386324C4-7562-4338-82AB-318A56038EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386324C4-7562-4338-82AB-318A56038EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386324C4-7562-4338-82AB-318A56038EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{941FED2C-3872-4B90-8146-D55965AA75FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{941FED2C-3872-4B90-8146-D55965AA75FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{941FED2C-3872-4B90-8146-D55965AA75FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{941FED2C-3872-4B90-8146-D55965AA75FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{941FED2C-3872-4B90-8146-D55965AA75FC} = {9E981C73-A020-4C3F-978C-E292EAE4928D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F2557F2-79E6-4F5A-BB9F-3ACC7999E9B4}
+	EndGlobalSection
+EndGlobal
