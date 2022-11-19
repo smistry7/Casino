@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[User] (
+﻿CREATE TABLE [dbo].[UserAccount] (
     [Id]              UNIQUEIDENTIFIER NOT NULL,
     [Username]        VARCHAR (50)     NOT NULL,
     [Balance]         DECIMAL (18, 2)     NULL,

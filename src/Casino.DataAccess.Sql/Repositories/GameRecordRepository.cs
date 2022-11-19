@@ -25,7 +25,7 @@ namespace Casino.DataAccess.Sql.Repositories
         public async Task<GameRecord> AddGameRecord(GameRecord gameRecord)
         {
             var gameRecordEntity = _mapper.Map<GameRecordEntity>(gameRecord);
-            var result = await _casinoDataContext.AddAsync(gameRecord);
+            var result = await _casinoDataContext.GameRecord.AddAsync(gameRecordEntity);
             await _casinoDataContext.SaveChangesAsync();
             return _mapper.Map<GameRecord>(result.Entity);
         }

@@ -13,6 +13,6 @@ namespace Casino.Core.Models
         public decimal Balance { get; set; }
         public DateTimeOffset DateJoined { get; set; }
         public decimal LuckCoefficient { get; set; }
-        public IEnumerable<GameRecord> GameRecords { get; set; } = null!;
+        public ICollection<GameRecord> GameRecords { get; set; } = null!;
     } 
 }

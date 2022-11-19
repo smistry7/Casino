@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Casino.DataAccess.Sql.Entities
 {
-    public class UserEntity
+    public class UserAccountEntity
     {
         [Key]
         public Guid Id { get; set; }
         public string Username { get; set; } = null!;
         public decimal Balance { get; set; }
         public decimal LuckCoefficient { get; set; }
-        public DateTimeOffset DateJoined { get; set; }
-        public ICollection<GameRecordEntity> Games { get; set; } = null!;
+        public DateTime DateJoined { get; set; }
+        public ICollection<GameRecordEntity> GameRecords { get; set; } = null!;
     }
 
     namespace Mapping
@@ -28,8 +22,8 @@ namespace Casino.DataAccess.Sql.Entities
         {
             public UserEntityMappings()
             {
-                CreateMap<User, UserEntity>();
-                CreateMap<UserEntity, User>();
+                CreateMap<User, UserAccountEntity>();
+                CreateMap<UserAccountEntity, User>();
             }
         }
     }

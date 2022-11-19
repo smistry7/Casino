@@ -20,6 +20,11 @@ containers:
     working_directory: /code
     ports:
       - "8123:1433"
+  
+  redis:
+    image: redis
+    ports: 
+      - "6001:6001"
 
 tasks:
   run-app:
@@ -29,3 +34,4 @@ tasks:
       command: sh -c "dotnet dev-certs https --clean && dotnet dev-certs https -t && dotnet run --project ./Casino.Api/Casino.Api.csproj --no-build"
     dependencies:
       - sql-server-container
+      - redis

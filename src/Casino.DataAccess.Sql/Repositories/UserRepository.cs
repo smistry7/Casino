@@ -4,6 +4,7 @@ using Casino.Core.Interfaces.Repositories;
 using Casino.DataAccess.Sql.Entities;
 using Casino.Core.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Casino.DataAccess.Sql.Repositories
 {
@@ -20,21 +21,22 @@ namespace Casino.DataAccess.Sql.Repositories
 
         public async Task<User> GetUser(Guid id)
         {
-            var result = await _casinoDataContext.Users.FindAsync(keyValues: id) ?? throw new Exception("User not found");
+            var result = _casinoDataContext.UserAccount.Include(x => x.GameRecords).FirstOrDefault(x => x.Id == id)
+                ?? throw new Exception("User not found");
             return _mapper.Map<User>(result);
         }
 
         public async Task<User> AddUser(User user)
         {
-            var userEntity = _mapper.Map<UserEntity>(user);
-            var result = await _casinoDataContext.Users.AddAsync(userEntity);
+            var userEntity = _mapper.Map<UserAccountEntity>(user);
+            var result = await _casinoDataContext.UserAccount.AddAsync(userEntity);
             await _casinoDataContext.SaveChangesAsync();
             return _mapper.Map<User>(result.Entity);
         }
         public async Task<User> UpdateUser(User user)
         {
-            var userEntity = _mapper.Map<UserEntity>(user);
-            _casinoDataContext.Users.Update(userEntity);
+            var userEntity = _mapper.Map<UserAccountEntity>(user);
+            _casinoDataContext.UserAccount.Update(userEntity);
             await _casinoDataContext.SaveChangesAsync();
             return user;
         }
