@@ -9,15 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.Core", "Casino.Core\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.Domain", "Casino.Domain\Casino.Domain.csproj", "{821D1F64-CE22-4500-B399-0B2FCF43E2CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.DataAccess", "Casino.DataAccess\Casino.DataAccess.csproj", "{386324C4-7562-4338-82AB-318A56038EDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.DataAccess.Sql", "Casino.DataAccess\Casino.DataAccess.Sql.csproj", "{386324C4-7562-4338-82AB-318A56038EDE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9E981C73-A020-4C3F-978C-E292EAE4928D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.UnitTests", "Casino.UnitTests\Casino.UnitTests.csproj", "{941FED2C-3872-4B90-8146-D55965AA75FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.Console", "Casino.Console\Casino.Console.csproj", "{7B7CB28A-ACEB-4555-981E-D1C17E9236C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.Console", "Casino.Console\Casino.Console.csproj", "{7B7CB28A-ACEB-4555-981E-D1C17E9236C0}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Casino.Database", "Casino.Database\Casino.Database.sqlproj", "{E7001020-41D6-4F38-BD87-7AA791417E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.DataAccess.DynamoDb", "Casino.DataAccess.DynamoDb\Casino.DataAccess.DynamoDb.csproj", "{1E9F2C3B-6D0C-4DFF-84C2-174A522FA3CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{E7001020-41D6-4F38-BD87-7AA791417E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7001020-41D6-4F38-BD87-7AA791417E2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7001020-41D6-4F38-BD87-7AA791417E2D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1E9F2C3B-6D0C-4DFF-84C2-174A522FA3CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E9F2C3B-6D0C-4DFF-84C2-174A522FA3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E9F2C3B-6D0C-4DFF-84C2-174A522FA3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E9F2C3B-6D0C-4DFF-84C2-174A522FA3CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
