@@ -22,7 +22,6 @@
             return this;
         }
 
-
         public Deck Discard(int count = 1)
         {
             _deck.Pop();
@@ -38,7 +37,6 @@
             }
             return cards;
         }
-
 
         private void Reset()
         {
