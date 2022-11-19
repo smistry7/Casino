@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Casino.DataAccess.Sql\Casino.DataAccess.Sql.csproj" />
-    <ProjectReference Include="..\Casino.DataAccess\Casino.DataAccess.Sql.csproj" />
   </ItemGroup>
 
   <ItemGroup>

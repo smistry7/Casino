@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Casino.ComponentTests;
 using Casino.DataAccess.Sql.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
