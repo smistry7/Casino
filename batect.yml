@@ -35,7 +35,7 @@ tasks:
     description: run casino app
     run:
       container: dotnet-sdk-container
-      command: dotnet run --project ./Casino.Api/Casino.Api.csproj --no-build
+      command: sh -c "dotnet dev-certs https --clean && dotnet dev-certs https -t && dotnet run --project ./Casino.Api/Casino.Api.csproj --no-build"
     dependencies:
       - sql-server-container
     prerequisites: 

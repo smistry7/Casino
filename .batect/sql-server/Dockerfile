@@ -22,7 +22,7 @@ RUN wget -progress=bar:force -q -O sqlpackage.zip https://go.microsoft.com/fwlin
 COPY ./Casino.Database.dacpac /tmp/db.dacpac
 
 # Configure external build arguments to allow configurability.
-ARG DBNAME=Database
+ARG DBNAME=CasinoDatabase
 ARG PASSWORD=YourS3cureP@ass
 
 # Configure the required environmental variables
