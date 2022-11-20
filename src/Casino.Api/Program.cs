@@ -9,11 +9,7 @@ namespace Casino.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            var configuration = new ConfigurationBuilder()
-              .AddJsonFile("appsettings.json", optional: true)
-              .Build();
-
+            
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -22,7 +18,7 @@ namespace Casino.Api
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Casino API", Version = "v1" });
             });
-            builder.Services.AddSqlServerDataStore(configuration);
+            builder.Services.AddSqlServerDataStore(builder.Configuration);
             builder.Services.AddDomain();
             builder.Services.AddMediatR(typeof(Program).Assembly);
 

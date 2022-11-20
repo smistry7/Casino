@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Casino.ComponentTests.Extensions;
+using Xunit.Abstractions;
 
 namespace Casino.ComponentTests.Controller
 {
     public class UserControllerTests : TestBase
     {
-        public UserControllerTests(WebApplicationFactory<Program> factory) : base(factory)
+        public UserControllerTests(WebApplicationFactory<Program> factory, ITestOutputHelper outputHelper) : base(factory, outputHelper)
         {
         }
 
@@ -27,6 +28,7 @@ namespace Casino.ComponentTests.Controller
             // act
             var response = await typedClient.GetUserResponse(Guid.Parse("FA20CD73-D1B0-49D9-83AE-00BC661A607D"));
             // assert
+            LogErrorResponse(response);
             response.Should().BeOkResponse();
         }
     }

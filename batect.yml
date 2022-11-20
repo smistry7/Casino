@@ -10,6 +10,9 @@ containers:
         name: nuget-cache
         container: /root/.nuget/packages
     working_directory: /code/src/
+    environment:
+      ConnectionStrings__SqlConnectionString: "Data Source=sql-server-container,1433;Initial Catalog=CasinoDatabase;User ID=sa;Password=YourS3cureP@ass"
+      ASPNETCORE_URLS: http://+:80
 
   sql-server-container:
     build_directory: ./.batect/sql-server
@@ -34,4 +37,12 @@ tasks:
       command: sh -c "dotnet dev-certs https --clean && dotnet dev-certs https -t && dotnet run --project ./Casino.Api/Casino.Api.csproj --no-build"
     dependencies:
       - sql-server-container
-      - redis
+      # - redis
+
+  run-component-tests: 
+    description: run component tests
+    run: 
+      container: dotnet-sdk-container
+      command: dotnet test ./Casino.ComponentTests/Casino.ComponentTests.csproj
+    dependencies:
+      - sql-server-container
