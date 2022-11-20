@@ -1,4 +1,4 @@
-﻿namespace Casino.Domain
+﻿namespace Casino.Core.Models
 {
     public static class CardReference
     {
@@ -31,7 +31,7 @@
         public IEnumerable<Card> Deal(int count = 1)
         {
             List<Card> cards = new List<Card>();
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 cards.Add(_deck.Pop());
             }
