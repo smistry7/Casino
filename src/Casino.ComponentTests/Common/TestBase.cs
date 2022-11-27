@@ -1,5 +1,7 @@
-﻿using Casino.Api;
+﻿using AutoFixture;
+using Casino.Api;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -14,10 +16,12 @@ namespace Casino.ComponentTests.Common
     {
         protected readonly WebApplicationFactory<Program> Factory;
         protected readonly ITestOutputHelper OutputHelper;
+        protected readonly Fixture Fixture;
         public TestBase(WebApplicationFactory<Program> factory, ITestOutputHelper outputHelper)
         {
             Factory = factory;
             OutputHelper = outputHelper;
+            Fixture = new Fixture();
         }
 
         public void LogErrorResponse<T>(ApiResponse<T> response)

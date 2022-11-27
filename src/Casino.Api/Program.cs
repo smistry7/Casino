@@ -1,6 +1,7 @@
 using Casino.DataAccess.Sql;
 using Casino.Domain;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Casino.Api
 {
@@ -19,8 +20,14 @@ namespace Casino.Api
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Casino API", Version = "v1" });
             });
             builder.Services.AddSqlServerDataStore(builder.Configuration);
+            builder.Services
+                .AddHealthChecks()
+                .AddSqlServer(builder.Configuration.GetConnectionString("SqlConnectionString"));
+
             builder.Services.AddDomain();
             builder.Services.AddMediatR(typeof(Program).Assembly);
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 
             var app = builder.Build();
 
@@ -32,9 +39,11 @@ namespace Casino.Api
                 app.UseDeveloperExceptionPage();
             }
             app.UseHttpsRedirection();
-
+            app.MapHealthChecks("health", new HealthCheckOptions
+            {
+                AllowCachingResponses = true,
+            });
             app.UseAuthorization();
-
 
             app.MapControllers();
 

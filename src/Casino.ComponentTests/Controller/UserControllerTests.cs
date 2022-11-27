@@ -10,26 +10,39 @@ using System.Text;
 using System.Threading.Tasks;
 using Casino.ComponentTests.Extensions;
 using Xunit.Abstractions;
+using Casino.Core.Models;
+using AutoFixture;
 
 namespace Casino.ComponentTests.Controller
 {
     public class UserControllerTests : TestBase
     {
+        private readonly IUserApi _typedClient;
         public UserControllerTests(WebApplicationFactory<Program> factory, ITestOutputHelper outputHelper) : base(factory, outputHelper)
         {
+            var client = Factory.CreateClient();
+            _typedClient = new ApiClientFactory(client).BuildApi<IUserApi>();
         }
 
         [Fact]
         public async Task UserController_Get_ReturnsSuccessfully()
         {
             // arrange 
-            var client = Factory.CreateClient();
-            var typedClient = new ApiClientFactory(client).BuildUserApi();
             // act
-            var response = await typedClient.GetUserResponse(Guid.Parse("FA20CD73-D1B0-49D9-83AE-00BC661A607D"));
+            var response = await _typedClient.GetUserResponse(KnownUsers.User1);
             // assert
             LogErrorResponse(response);
             response.Should().BeOkResponse();
+        }
+
+        [Fact]
+        public async Task UserController_Post_ReturnsSuccessfully()
+        {
+            var user = Fixture.Create<User>();
+
+            var response = await _typedClient.PostUserResponse(user);
+
+            response.Content!.Balance.Should().Be(user.Balance);
         }
     }
 }

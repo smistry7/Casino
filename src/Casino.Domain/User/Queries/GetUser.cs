@@ -1,6 +1,7 @@
 ﻿using Casino.Core.Interfaces.Repositories;
 using FluentValidation;
 using MediatR;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Casino.Domain.User.Queries
 {
@@ -8,7 +9,7 @@ namespace Casino.Domain.User.Queries
     {
         public record Request(Guid Id) : IRequest<Core.Models.User>;
 
-        public class Validator: AbstractValidator<Request>
+        public class Validator : AbstractValidator<Request>
         {
             public Validator()
             {
@@ -26,7 +27,8 @@ namespace Casino.Domain.User.Queries
 
             public async Task<Core.Models.User> Handle(Request request, CancellationToken cancellationToken)
             {
-
+                var validator = new Validator();
+                await validator.ValidateAndThrowAsync(request);
                 return await _userRepository.GetUser(request.Id);
             }
         }

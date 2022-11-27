@@ -12,13 +12,13 @@ namespace Casino.ComponentTests.WebApiClient
             _httpClient = httpClient;   
         }
 
-        public IUserApi BuildUserApi()
+        public T BuildApi<T>() where T : ICasinoApi
         {
             var serialiser = new NewtonsoftJsonContentSerializer(new Newtonsoft.Json.JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             });
-            return RestService.For<IUserApi>(_httpClient, new RefitSettings { ContentSerializer = serialiser });
+            return RestService.For<T>(_httpClient, new RefitSettings { ContentSerializer = serialiser });
         }
     }
 

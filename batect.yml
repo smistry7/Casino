@@ -2,7 +2,7 @@ containers:
   dotnet-sdk-container:
     image: mcr.microsoft.com/dotnet/sdk:6.0
     ports:
-      - 5001:80
+      - "5001:5001"
     volumes:
       - local: .
         container: /code
@@ -12,7 +12,7 @@ containers:
     working_directory: /code/src/
     environment:
       ConnectionStrings__SqlConnectionString: "Data Source=sql-server-container,1433;Initial Catalog=CasinoDatabase;User ID=sa;Password=YourS3cureP@ass"
-      ASPNETCORE_URLS: http://+:80
+      ASPNETCORE_URLS: http://*:5001
 
   sql-server-container:
     build_directory: ./.batect/sql-server

@@ -1,4 +1,6 @@
-﻿using Casino.Core.Interfaces.Repositories;
+﻿using AutoFixture;
+using Casino.Core.Interfaces.Repositories;
+using Casino.Core.Models;
 using Casino.DataAccess.Sql.Tests.Common;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,16 +9,37 @@ namespace Casino.ComponentTests
 {
     public class UserRepositoryTests : TestBase
     {
+        private readonly IUserRepository _userRepository;
+        private readonly IFixture _fixture;
         public UserRepositoryTests(TestFixture testFixture) : base(testFixture)
         {
+            _userRepository = Services.GetRequiredService<IUserRepository>();
+            _fixture = new Fixture();
         }
 
         [Fact]
         public async Task GetUser_ReturnsGameInfo()
         {
-            var userRepo = Services.GetService<IUserRepository>();
-            var user = await userRepo.GetUser(KnownUsers.User1);
+            var user = await _userRepository.GetUser(KnownUsers.User1);
             user.GameRecords.Should().NotBeEmpty();
+        }
+
+        [Fact]
+        public async Task AddUser_ReturnsCorrectly()
+        {
+            var user = _fixture.Create<Core.Models.User>();
+            var savedUser = await _userRepository.AddUser(user);
+            savedUser.Username.Should().Be(user.Username);
+        }
+
+        [Fact]
+        public async Task UpdateUser_ReturnsCorrectly()
+        {
+            var user = await _userRepository.GetUser(KnownUsers.User1);
+            user.LuckCoefficient = (decimal) 0.01;
+            var result = await _userRepository.UpdateUser(user);
+
+            result.LuckCoefficient.Should().Be((decimal) 0.01);
         }
     }
 }

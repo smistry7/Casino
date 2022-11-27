@@ -21,7 +21,10 @@ namespace Casino.DataAccess.Sql.Repositories
 
         public async Task<User> GetUser(Guid id)
         {
-            var result = _casinoDataContext.UserAccount.Include(x => x.GameRecords).FirstOrDefault(x => x.Id == id)
+            var result = _casinoDataContext.UserAccount
+                .AsNoTracking()
+                .Include(x => x.GameRecords)
+                .FirstOrDefault(x => x.Id == id)
                 ?? throw new Exception("User not found");
             return _mapper.Map<User>(result);
         }
