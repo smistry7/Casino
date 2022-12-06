@@ -1,2 +1,4 @@
 FROM localstack/localstack:latest
-COPY ./init.sh /docker-entrypoint-initaws.d/init.sh
+
+COPY ./.batect/localstack/dynamodb/ /dynamodb/
+COPY ./.batect/localstack/init.sh /docker-entrypoint-initaws.d/init.sh

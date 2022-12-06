@@ -30,7 +30,8 @@ containers:
       - "6001:6001"
 
   localstack:
-    build_directory: ./.batect/localstack
+    build_directory: .
+    dockerfile: ./.batect/localstack/Dockerfile
     ports:
       - "4566:4566"
     environment:
