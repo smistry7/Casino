@@ -29,6 +29,19 @@ containers:
     ports: 
       - "6001:6001"
 
+  localstack:
+    build_directory: ./.batect/localstack
+    ports:
+      - "4566:4566"
+    environment:
+      ENVIRONMENT: dev
+      AWS_DEFAULT_REGION: ap-southeast-2
+      TEST_AWS_ACCOUNT_ID: "000000000000"
+      AWS_ACCESS_KEY_ID: batect
+      AWS_SECRET_ACCESS_KEY: batect
+      SERVICES: s3,lambda,dynamodb
+
+
 tasks:
   run-app:
     description: run casino app
@@ -37,6 +50,7 @@ tasks:
       command: sh -c "dotnet dev-certs https --clean && dotnet dev-certs https -t && dotnet run --project ./Casino.Api/Casino.Api.csproj --no-build"
     dependencies:
       - sql-server-container
+      - localstack
       # - redis
 
   run-component-tests: 

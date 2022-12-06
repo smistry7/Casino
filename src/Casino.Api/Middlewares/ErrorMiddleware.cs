@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Casino.Api.Exceptions;
+using FluentValidation;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,13 +21,39 @@ namespace Casino.Api.Middlewares
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
+            //todo: add logging
             try
             {
                 await _next(httpContext);
             }
+            catch (NotFoundException e)
+            {
+                await ErrorResponse(httpContext, HttpStatusCode.NotFound, e.Message);
+            }
+            catch(BadRequestException e)
+            {
+                await ErrorResponse(httpContext, HttpStatusCode.BadRequest, e.Message);
+            }
+            catch(ValidationException e)
+            {
+                await ErrorResponse(httpContext, HttpStatusCode.BadRequest, string.Join(".", e.Errors));
+            }
             catch (Exception e)
             {
+                await ErrorResponse(httpContext, HttpStatusCode.InternalServerError, "An unhandled error occurred");
             }
         }
+
+        private async Task ErrorResponse(HttpContext context, HttpStatusCode statusCode, string? message)
+        {
+            var response = new
+            {
+                StatusCode = statusCode,
+                Message = message
+            };
+            var jsonResponse = JsonConvert.SerializeObject(response);
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int) statusCode;
+            await context.Response.WriteAsync(jsonResponse);
     }
 }

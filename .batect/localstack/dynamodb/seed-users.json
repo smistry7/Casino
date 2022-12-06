@@ -1,0 +1,25 @@
+{
+    "users" : [
+        {
+            "PutRequest": {
+                "User": {
+                    "id" : {
+                        "S": "fa20cd73-d1b0-49d9-83ae-00bc661a607d"
+                    },
+                    "username": {
+                        "S": "omcgragh0"
+                    },
+                    "balance" : {
+                        "N": "300.00"
+                    },
+                    "date-joined": {
+                        "S": "2022-12-25T12:00:00.000Z"
+                    },
+                    "luck-coefficient": {
+                        "N": "0.34"
+                    }
+                }
+            }
+        }
+    ]
+}

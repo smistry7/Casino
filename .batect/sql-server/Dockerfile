@@ -1,6 +1,6 @@
-from mcr.microsoft.com/mssql/server:2019-latest
+FROM mcr.microsoft.com/mssql/server:2019-latest
 
-workdir /src/.batect/sql-server
+WORKDIR /src/.batect/sql-server
 
 COPY ./Casino.Database.dacpac .
 COPY ./SeedData ./SeedData

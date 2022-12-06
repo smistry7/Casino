@@ -1,3 +1,4 @@
+using Casino.Api.Middlewares;
 using Casino.DataAccess.Sql;
 using Casino.Domain;
 using MediatR;
@@ -38,6 +39,7 @@ namespace Casino.Api
                 app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Casino API V1"); });
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMiddleware<ErrorMiddleware>();
             app.UseHttpsRedirection();
             app.MapHealthChecks("health", new HealthCheckOptions
             {

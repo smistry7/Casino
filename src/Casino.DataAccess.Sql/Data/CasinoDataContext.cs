@@ -14,7 +14,7 @@ namespace Casino.DataAccess.Sql.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GameRecordEntity>()
-                .HasOne<UserAccountEntity>(g => g.UserAccount)
+                .HasOne(g => g.UserAccount)
                 .WithMany(u => u.GameRecords)
                 .HasForeignKey(g => g.UserId);
             modelBuilder.Entity<UserAccountEntity>();

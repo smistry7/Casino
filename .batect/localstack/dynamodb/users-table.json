@@ -1,0 +1,30 @@
+{
+    "TableName": "users",
+    "KeySchema": [
+      {
+        "KeyType": "HASH",
+        "AttributeName": "id"
+      },
+      {
+        "KeyType": "RANGE",
+        "AttributeName": "username"
+      }
+    ],
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "id",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "username",
+        "AttributeType": "S"
+      }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "Tags": [
+      {
+        "Key": "balance",
+        "Value": ""
+      }
+    ]
+  }
