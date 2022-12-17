@@ -5,14 +5,16 @@ namespace Casino.DataAccess.DynamoDb.Repositories
 {
     public class BaseRepository
     {
-        protected readonly AmazonDynamoDBClient AmazonDynamoDBClient;
-        protected readonly DynamoDBContext DynamoDBContext;
+        protected readonly IAmazonDynamoDB AmazonDynamoDBClient;
+        protected readonly IDynamoDBContext DynamoDBContext;
 
-        public BaseRepository()
+        public BaseRepository(
+            IAmazonDynamoDB amazonDynamoDB,
+            IDynamoDBContext dynamoDBContext
+            )
         {
-
+            AmazonDynamoDBClient = amazonDynamoDB;
+            DynamoDBContext = dynamoDBContext;
         }
-
-        
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using AutoMapper;
+using Casino.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,11 @@ namespace Casino.DataAccess.DynamoDb.Entities
     [DynamoDBTable("users")]
     public record UserEntity
     {
-        [DynamoDBHashKey("id")]
+        [DynamoDBProperty("id")]
+        [DynamoDBHashKey]
         public Guid Id { get; set; }
 
-        [DynamoDBRangeKey("username")]
+        [DynamoDBProperty("username")]
         public string Username { get; set; } = null!;
         
         [DynamoDBProperty("luck-coefficient")]
@@ -25,5 +28,16 @@ namespace Casino.DataAccess.DynamoDb.Entities
         [DynamoDBProperty("balance")]
         public decimal Balance { get; set; }
 
+    }
+
+    namespace Mapping
+    {
+        public class UserEntityMappings: Profile
+        {
+            public UserEntityMappings()
+            {
+                CreateMap<UserEntity, User>().ReverseMap();
+            }
+        }
     }
 }

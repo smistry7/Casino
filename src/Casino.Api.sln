@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.DataAccess.Sql.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.DataAccess.Sql", "Casino.DataAccess.Sql\Casino.DataAccess.Sql.csproj", "{B451C0A6-2C8B-4633-83B6-42DB098CBA8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.ComponentTests", "Casino.ComponentTests\Casino.ComponentTests.csproj", "{70A7B257-A090-4263-BF6E-CAF33FF6476D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Casino.ComponentTests", "Casino.ComponentTests\Casino.ComponentTests.csproj", "{70A7B257-A090-4263-BF6E-CAF33FF6476D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.DataAccess.DynamoDb.Tests", "Casino.DataAccess.DynamoDb.Tests\Casino.DataAccess.DynamoDb.Tests.csproj", "{ECF71677-1083-441D-A04D-17D3E6ACE7AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{70A7B257-A090-4263-BF6E-CAF33FF6476D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70A7B257-A090-4263-BF6E-CAF33FF6476D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70A7B257-A090-4263-BF6E-CAF33FF6476D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF71677-1083-441D-A04D-17D3E6ACE7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF71677-1083-441D-A04D-17D3E6ACE7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF71677-1083-441D-A04D-17D3E6ACE7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF71677-1083-441D-A04D-17D3E6ACE7AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{941FED2C-3872-4B90-8146-D55965AA75FC} = {9E981C73-A020-4C3F-978C-E292EAE4928D}
 		{213017C6-97BE-4041-8B8B-A92A9206CA45} = {9E981C73-A020-4C3F-978C-E292EAE4928D}
 		{70A7B257-A090-4263-BF6E-CAF33FF6476D} = {9E981C73-A020-4C3F-978C-E292EAE4928D}
+		{ECF71677-1083-441D-A04D-17D3E6ACE7AB} = {9E981C73-A020-4C3F-978C-E292EAE4928D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F2557F2-79E6-4F5A-BB9F-3ACC7999E9B4}

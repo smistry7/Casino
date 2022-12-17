@@ -12,6 +12,7 @@ containers:
     working_directory: /code/src/
     environment:
       ConnectionStrings__SqlConnectionString: "Data Source=sql-server-container,1433;Initial Catalog=CasinoDatabase;User ID=sa;Password=YourS3cureP@ass"
+      AWS__ServiceURL: "http://localstack:4566"
       ASPNETCORE_URLS: http://*:5001
 
   sql-server-container:
@@ -35,12 +36,12 @@ containers:
     ports:
       - "4566:4566"
     environment:
-      ENVIRONMENT: dev
-      AWS_DEFAULT_REGION: ap-southeast-2
+      ENVIRONMENT: dev./batect
       TEST_AWS_ACCOUNT_ID: "000000000000"
-      AWS_ACCESS_KEY_ID: batect
-      AWS_SECRET_ACCESS_KEY: batect
+      AWS_ACCESS_KEY_ID: foo
+      AWS_SECRET_ACCESS_KEY: bar
       SERVICES: s3,lambda,dynamodb
+      AWS_DEFAULT_REGION: ap-southeast-2
 
 
 tasks:

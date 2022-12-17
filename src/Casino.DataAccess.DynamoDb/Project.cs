@@ -1,4 +1,7 @@
 ﻿using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using Casino.Core.Interfaces.Repositories;
+using Casino.DataAccess.DynamoDb.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,15 +19,23 @@ namespace Casino.DataAccess.DynamoDb
 
         public static IServiceCollection AddDynamoDbDataStore(this IServiceCollection services, IConfiguration configuration)
         {
-            var config = new AmazonDynamoDBConfig
-            {
-                ServiceURL = configuration["DynamoDb:ServiceUrl"],
-            };
+            services.AddDefaultAWSOptions(configuration.GetAWSOptions());
             services.AddSingleton<IAmazonDynamoDB>(sp =>
             {
+                var config = new AmazonDynamoDBConfig
+                {
+                    ServiceURL = configuration["AWS:ServiceURL"],
+                    AuthenticationRegion = configuration["AWS:Region"]
+                };
                 return new AmazonDynamoDBClient(config);
             });
-            return services; 
+
+            services.AddSingleton<IDynamoDBContext, DynamoDBContext>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IGameRecordRepository, GameRecordRepository>();
+            services.AddAutoMapper(Assembly);
+
+            return services;
         }
     }
 }
