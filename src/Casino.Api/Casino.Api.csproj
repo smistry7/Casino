@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Casino.Core\Casino.Core.csproj" />
+    <ProjectReference Include="..\Casino.DataAccess.DynamoDb\Casino.DataAccess.DynamoDb.csproj" />
     <ProjectReference Include="..\Casino.DataAccess.Sql\Casino.DataAccess.Sql.csproj" />
     <ProjectReference Include="..\Casino.Domain\Casino.Domain.csproj" />
   </ItemGroup>

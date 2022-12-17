@@ -1,12 +1,7 @@
 ﻿using Casino.Api.Exceptions;
 using FluentValidation;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Casino.Api.Middlewares
 {
@@ -53,7 +48,8 @@ namespace Casino.Api.Middlewares
             };
             var jsonResponse = JsonConvert.SerializeObject(response);
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int) statusCode;
+            context.Response.StatusCode = (int)statusCode;
             await context.Response.WriteAsync(jsonResponse);
+        }
     }
 }

@@ -2,7 +2,7 @@
     "users" : [
         {
             "PutRequest": {
-                "User": {
+                "Item": {
                     "id" : {
                         "S": "fa20cd73-d1b0-49d9-83ae-00bc661a607d"
                     },

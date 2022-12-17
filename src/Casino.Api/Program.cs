@@ -1,4 +1,5 @@
 using Casino.Api.Middlewares;
+using Casino.DataAccess.DynamoDb;
 using Casino.DataAccess.Sql;
 using Casino.Domain;
 using MediatR;
@@ -20,7 +21,16 @@ namespace Casino.Api
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Casino API", Version = "v1" });
             });
-            builder.Services.AddSqlServerDataStore(builder.Configuration);
+            switch (builder.Configuration["DataStore"])
+            {
+                case "DynamoDb":
+                    builder.Services.AddDynamoDbDataStore(builder.Configuration);
+                    break;
+                case "Sql":
+                default:
+                    builder.Services.AddSqlServerDataStore(builder.Configuration);
+                    break;
+            }
             builder.Services
                 .AddHealthChecks()
                 .AddSqlServer(builder.Configuration.GetConnectionString("SqlConnectionString"));
