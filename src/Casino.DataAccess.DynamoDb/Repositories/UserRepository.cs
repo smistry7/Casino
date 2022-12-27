@@ -41,7 +41,7 @@ namespace Casino.DataAccess.DynamoDb.Repositories
         public async Task<User> UpdateUser(User user)
         {
             var userEntity = _mapper.Map<UserEntity>(user);
-            await DynamoDBContext.SaveAsync(user);
+            await DynamoDBContext.SaveAsync(userEntity);
             return user;
         }
     }

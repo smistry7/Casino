@@ -59,8 +59,10 @@ namespace Casino.Domain.GameRecord.Commands
 
                 var user = await _userRepository.GetUser(request.UserId);
 
-                var newLuckCoefficient = ((user.LuckCoefficient * user.GameRecords.Count) + request.WinProbability) 
-                    / user.GameRecords.Count + 1;
+                var gameRecordsCount = user.GameRecords?.Count ?? 0;
+
+                var newLuckCoefficient = ((user.LuckCoefficient * gameRecordsCount) + request.WinProbability) 
+                    / (gameRecordsCount + 1);
                 user.LuckCoefficient = newLuckCoefficient;
 
                 await _userRepository.UpdateUser(user);

@@ -18,16 +18,18 @@ namespace Casino.DataAccess.DynamoDb.Entities
 
         [DynamoDBProperty("username")]
         public string Username { get; set; } = null!;
-        
+
         [DynamoDBProperty("luck-coefficient")]
         public decimal LuckCoefficient { get; set; }
-        
+
         [DynamoDBProperty("date-joined")]
         public DateTime DateJoined { get; set; }
-        
+
         [DynamoDBProperty("balance")]
         public decimal Balance { get; set; }
 
+        [DynamoDBProperty("game-records")]
+        public List<GameRecord> GameRecords { get; set; } = new();
     }
 
     namespace Mapping

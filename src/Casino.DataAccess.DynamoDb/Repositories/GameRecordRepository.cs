@@ -2,6 +2,7 @@
 using Amazon.DynamoDBv2.DataModel;
 using Casino.Core.Interfaces.Repositories;
 using Casino.Core.Models;
+using Casino.DataAccess.DynamoDb.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,12 @@ namespace Casino.DataAccess.DynamoDb.Repositories
         {
         }
 
-        public Task<GameRecord> AddGameRecord(GameRecord gameRecord)
+        public async Task<GameRecord> AddGameRecord(GameRecord gameRecord)
         {
-            throw new NotImplementedException();
+            var user = await DynamoDBContext.LoadAsync<UserEntity>(gameRecord.UserId);
+            user.GameRecords.Add(gameRecord);
+            await DynamoDBContext.SaveAsync(user);
+            return gameRecord;
         }
     }
 }

@@ -3,6 +3,7 @@ using Casino.Core.Interfaces.Repositories;
 using Casino.Core.Models;
 using Casino.DataAccess.DynamoDb.Tests.Common;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Casino.DataAccess.DynamoDb.Tests
     {
         public UserRepositoryTests(TestFixture testFixture) : base(testFixture)
         {
+
         }
 
         [Fact]
@@ -25,14 +27,31 @@ namespace Casino.DataAccess.DynamoDb.Tests
             var userRepository = Services.GetRequiredService<IUserRepository>();
             var result = await userRepository.GetUser(knownUser);
 
-            result.Should().NotBeNull();
-            result.Id.Should().Be(knownUser);
+            using (new AssertionScope())
+            {
+                result.Should().NotBeNull();
+                result.Id.Should().Be(knownUser);
+            }
         }
 
         [Fact]
         public async Task AddUserWorksCorrectly()
         {
-            var newUser = new Fixture
+            var newUser = new User()
+            {
+                Username = "smistry7",
+                Balance = 400,
+                GameRecords = new List<GameRecord>()
+            };
+
+            var userRepository = Services.GetRequiredService<IUserRepository>();
+            var result = await userRepository.AddUser(newUser);
+
+            using (new AssertionScope())
+            {
+                result.Username.Should().Be(newUser.Username);
+                result.Balance.Should().Be(newUser.Balance);
+            }
         }
     }
 }
