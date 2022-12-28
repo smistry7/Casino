@@ -4,6 +4,7 @@ using Casino.Core.Models;
 using Casino.Domain.User.Commands;
 using Casino.Domain.User.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Casino.Api.Controllers
@@ -31,11 +32,12 @@ namespace Casino.Api.Controllers
             return _mapper.Map<UserDto>(response);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<User> PostUser([FromBody] UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            return await _mediator.Send(new AddUser.Request(user.Username, user.Balance));
+            return await _mediator.Send(new AddUser.Request(user.Username, user.Balance, user.PasswordHash));
         }
 
     }

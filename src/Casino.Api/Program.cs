@@ -1,9 +1,18 @@
+using Casino.Api.Authorisation;
 using Casino.Api.Middlewares;
+using Casino.Core.Extensions;
 using Casino.DataAccess.DynamoDb;
 using Casino.DataAccess.Sql;
 using Casino.Domain;
+using Casino.Domain.User.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Options;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace Casino.Api
 {
@@ -12,11 +21,10 @@ namespace Casino.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Casino API", Version = "v1" });
@@ -39,6 +47,8 @@ namespace Casino.Api
             builder.Services.AddMediatR(typeof(Program).Assembly);
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
+            builder.Services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             var app = builder.Build();
 
@@ -55,6 +65,7 @@ namespace Casino.Api
             {
                 AllowCachingResponses = true,
             });
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

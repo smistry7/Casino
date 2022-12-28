@@ -18,6 +18,8 @@ namespace Casino.DataAccess.DynamoDb.Entities
 
         [DynamoDBProperty("username")]
         public string Username { get; set; } = null!;
+        [DynamoDBProperty("password-hash")]
+        public string PasswordHash { get; set; } = null!;
 
         [DynamoDBProperty("luck-coefficient")]
         public decimal LuckCoefficient { get; set; }

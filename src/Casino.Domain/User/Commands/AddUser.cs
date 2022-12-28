@@ -6,7 +6,7 @@ namespace Casino.Domain.User.Commands
 {
     public class AddUser
     {
-        public record Request(string Name, decimal Balance) : IRequest<Core.Models.User>;
+        public record Request(string Name, decimal Balance, string PasswordHash) : IRequest<Core.Models.User>;
 
         public class Validator : AbstractValidator<Request>
         {
@@ -32,6 +32,7 @@ namespace Casino.Domain.User.Commands
                 {
                     Id = Guid.NewGuid(),
                     Username = request.Name,
+                    PasswordHash = request.PasswordHash,
                     Balance = request.Balance,
                     DateJoined = DateTime.UtcNow,
                 };

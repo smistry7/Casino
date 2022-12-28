@@ -7,6 +7,7 @@ namespace Casino.DataAccess.Sql.Entities
         [Key]
         public Guid Id { get; set; }
         public string Username { get; set; } = null!;
+        public string PasswordHash { get; set; } = null!;
         public decimal Balance { get; set; }
         public decimal LuckCoefficient { get; set; }
         public DateTime DateJoined { get; set; }
