@@ -9,6 +9,9 @@
                     "username": {
                         "S": "omcgragh0"
                     },
+                    "password-hash": {
+                        "S": "008c70392e3abfbd0fa47bbc2ed96aa99bd49e159727fcba0f2e6abeb3a9d601"
+                    },
                     "balance" : {
                         "N": "300.00"
                     },

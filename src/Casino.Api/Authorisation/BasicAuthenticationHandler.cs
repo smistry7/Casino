@@ -31,13 +31,19 @@ namespace Casino.Api.Authorisation
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
+
+            if (!Request.Headers.ContainsKey("Authorization"))
+            {
+                return AuthenticateResult.Fail("Authorization header not found");
+            }
             var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
             var credentialBytes = Convert.FromBase64String(authHeader.Parameter!);
             var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
             var username = credentials[0];
             var password = credentials[1];
 
-            var user = await _mediator.Send(new GetUser.Request(Guid.Parse(username)));
+            var id = await _mediator.Send(new GetIdByUsername.Request(username));
+            var user = await _mediator.Send(new GetUser.Request(id));
             if (password.Encrypt() == user.PasswordHash)
             {
                 var claims = new[]

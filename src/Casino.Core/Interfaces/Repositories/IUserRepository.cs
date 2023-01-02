@@ -7,5 +7,6 @@ namespace Casino.Core.Interfaces.Repositories
         Task<User> AddUser(User user);
         Task<User> GetUser(Guid id);
         Task<User> UpdateUser(User user);
+        Task<Guid> GetIdFromUserName(string username);
     }
 }

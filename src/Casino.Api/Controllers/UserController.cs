@@ -24,7 +24,8 @@ namespace Casino.Api.Controllers
             _mediator = mediator;
             _mapper = mapper;
         }
-
+        
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<UserDto> Get([FromRoute] Guid id)
         {

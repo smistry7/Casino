@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Amazon.DynamoDBv2.DocumentModel;
 
 namespace Casino.DataAccess.DynamoDb.Repositories
 {
@@ -32,6 +33,13 @@ namespace Casino.DataAccess.DynamoDb.Repositories
             return user;
         }
 
+        public async Task<Guid> GetIdFromUserName(string username)
+        {
+            var user = await DynamoDBContext
+                .ScanAsync<UserEntity>(new List<ScanCondition>() { new ScanCondition(nameof(UserEntity.Username), ScanOperator.Equal, username) })
+                .GetRemainingAsync();
+            return user.Single().Id;
+        }
         public async Task<User> GetUser(Guid id)
         {
             var userEntity = await DynamoDBContext.LoadAsync<UserEntity>(id);

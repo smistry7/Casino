@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
@@ -27,7 +28,29 @@ namespace Casino.Api
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Casino API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Casino API", Version = "v1" });
+                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                    Scheme = "basic",
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Description = "Basic Authorisation using bearer scheme"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "basic"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
             switch (builder.Configuration["DataStore"])
             {

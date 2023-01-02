@@ -3,6 +3,7 @@ using Casino.Api.Dto;
 using Casino.Core.Models;
 using Casino.Domain.GameRecord.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Casino.Api.Controllers
@@ -20,6 +21,7 @@ namespace Casino.Api.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<GameRecord> PostRecord([FromBody] GameRecordDto user)
         {

@@ -21,10 +21,10 @@ namespace Casino.DataAccess.Sql.Repositories
 
         public async Task<User> GetUser(Guid id)
         {
-            var result = _casinoDataContext.UserAccount
+            var result = await _casinoDataContext.UserAccount
                 .AsNoTracking()
                 .Include(x => x.GameRecords)
-                .FirstOrDefault(x => x.Id == id)
+                .FirstOrDefaultAsync(x => x.Id == id)
                 ?? throw new Exception("User not found");
             return _mapper.Map<User>(result);
         }
@@ -42,6 +42,17 @@ namespace Casino.DataAccess.Sql.Repositories
             _casinoDataContext.UserAccount.Update(userEntity);
             await _casinoDataContext.SaveChangesAsync();
             return user;
+        }
+
+        public async Task<Guid> GetIdFromUserName(string username)
+        {
+            var result = await _casinoDataContext.UserAccount
+                .AsNoTracking()
+                .Include(x => x.GameRecords)
+                .FirstOrDefaultAsync(x => x.Username == username)
+                ?? throw new Exception("user not found");
+
+            return result.Id;
         }
     }
 }
