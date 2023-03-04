@@ -1,0 +1,16 @@
+name: Run Integration Tests
+
+on:
+  push: 
+    branches:
+    - "*"
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+    steps:
+    - uses: action/checkout@v2
+    - name: run tests
+      run: ./batect run-component-tests
