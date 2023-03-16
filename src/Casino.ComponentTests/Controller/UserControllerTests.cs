@@ -12,6 +12,7 @@ using Casino.ComponentTests.Extensions;
 using Xunit.Abstractions;
 using Casino.Core.Models;
 using AutoFixture;
+using Casino.Api.Dto;
 
 namespace Casino.ComponentTests.Controller
 {
@@ -20,7 +21,7 @@ namespace Casino.ComponentTests.Controller
         private readonly IUserApi _typedClient;
         public UserControllerTests(WebApplicationFactory<Program> factory, ITestOutputHelper outputHelper) : base(factory, outputHelper)
         {
-            var client = Factory.CreateClient();
+            var client = GetAuthenticatedClient();
             _typedClient = new ApiClientFactory(client).BuildApi<IUserApi>();
         }
 
@@ -38,7 +39,7 @@ namespace Casino.ComponentTests.Controller
         [Fact]
         public async Task UserController_Post_ReturnsSuccessfully()
         {
-            var user = Fixture.Create<User>();
+            var user = Fixture.Create<UserDto>();
 
             var response = await _typedClient.PostUserResponse(user);
 

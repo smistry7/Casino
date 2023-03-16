@@ -1,4 +1,5 @@
-﻿using Casino.Core.Models;
+﻿using Casino.Api.Dto;
+using Casino.Core.Models;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,6 @@ namespace Casino.ComponentTests.WebApiClient
         [Get("/api/users/{id}")]
         Task<ApiResponse<User>> GetUserResponse(Guid id);
         [Post("/api/users")]
-        Task<ApiResponse<User>> PostUserResponse([Body] User user);
+        Task<ApiResponse<User>> PostUserResponse([Body] UserDto user);
     }
 }

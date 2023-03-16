@@ -1,7 +1,10 @@
 ﻿using AutoFixture;
 using Casino.Api;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using System;
 using System.Collections.Generic;
@@ -19,7 +22,14 @@ namespace Casino.ComponentTests.Common
         protected readonly Fixture Fixture;
         public TestBase(WebApplicationFactory<Program> factory, ITestOutputHelper outputHelper)
         {
-            Factory = factory;
+            Factory = factory.WithWebHostBuilder(host =>
+            {
+                host.ConfigureTestServices(services =>
+                {
+                    services.AddAuthentication("Test")
+                    .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>("Test", null);
+                });
+            });
             OutputHelper = outputHelper;
             Fixture = new Fixture();
         }
@@ -31,6 +41,13 @@ namespace Casino.ComponentTests.Common
             {
                 OutputHelper.WriteLine(content);
             }
+        }
+
+        protected HttpClient GetAuthenticatedClient()
+        {
+            var client = Factory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Test", "true");
+            return client;
         }
     }
 }

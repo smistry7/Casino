@@ -7,7 +7,7 @@ namespace Casino.Api.Dto
     {
         public Guid Id { get; set; }
         public string Username { get; set; } = null!;
-        public string Password { get; set; } = null!;
+        public string PasswordHash { get; set; } = null!;
         public decimal Balance { get; set; }
         public DateTime DateJoined { get; set; }
         public decimal LuckCoefficient { get; set; }

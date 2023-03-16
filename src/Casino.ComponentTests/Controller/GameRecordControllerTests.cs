@@ -15,7 +15,7 @@ namespace Casino.ComponentTests.Controller
         private readonly IGameRecordApi _typedClient;
         public GameRecordControllerTests(WebApplicationFactory<Program> factory, ITestOutputHelper outputHelper) : base(factory, outputHelper)
         {
-            var client = Factory.CreateClient();
+            var client = GetAuthenticatedClient();
             _typedClient = new ApiClientFactory(client).BuildApi<IGameRecordApi>();
         }
 
