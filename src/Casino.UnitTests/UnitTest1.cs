@@ -1,6 +1,6 @@
 using Casino.Domain;
 
-namespace Casino.UnitTests
+namespace Casino.Domain.UnitTests
 {
     public class DeckTests
     {

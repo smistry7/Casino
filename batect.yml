@@ -14,6 +14,8 @@ containers:
       ConnectionStrings__SqlConnectionString: "Data Source=sql-server-container,1433;Initial Catalog=CasinoDatabase;User ID=sa;Password=YourS3cureP@ass"
       AWS__ServiceURL: "http://localstack:4566"
       ASPNETCORE_URLS: http://*:5001
+      AWS_ACCESS_KEY_ID: foo
+      AWS_SECRET_ACCESS_KEY: bar
 
   sql-server-container:
     build_directory: ./.batect/sql-server
@@ -55,6 +57,12 @@ tasks:
       - localstack
       # - redis
 
+  run-unit-tests:
+    description: run domain unit tests
+    run: 
+      container: dotnet-sdk-container
+      command: dotnet test ./Casino.UnitTests/Casino.Domain.UnitTests.csproj
+
   run-component-tests: 
     description: run component tests
     run: 
@@ -62,3 +70,21 @@ tasks:
       command: dotnet test ./Casino.ComponentTests/Casino.ComponentTests.csproj
     dependencies:
       - sql-server-container
+      - localstack
+
+  run-sql-tests:
+    description: run SQL repository tests
+    run: 
+      container: dotnet-sdk-container
+      command: dotnet test ./Casino.DataAccess.Sql.Tests/Casino.DataAccess.Sql.Tests.csproj
+    dependencies:
+      - sql-server-container
+
+  run-dynamo-db-tests:
+    description: run DynamoDB repository tests
+    run: 
+      container: dotnet-sdk-container
+      command: dotnet test ./Casino.DataAccess.DynamoDb.Tests/Casino.DataAccess.DynamoDb.Tests.csproj
+    dependencies:
+      - localstack
+    

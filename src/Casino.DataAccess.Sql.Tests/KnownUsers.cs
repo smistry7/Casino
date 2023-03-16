@@ -1,4 +1,4 @@
-﻿namespace Casino.ComponentTests
+﻿namespace Casino.DataAccess.Sql.Tests
 {
     public static class KnownUsers
     {

@@ -5,7 +5,7 @@ using Casino.DataAccess.Sql.Tests.Common;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Casino.ComponentTests
+namespace Casino.DataAccess.Sql.Tests
 {
     public class UserRepositoryTests : TestBase
     {
@@ -27,7 +27,7 @@ namespace Casino.ComponentTests
         [Fact]
         public async Task AddUser_ReturnsCorrectly()
         {
-            var user = _fixture.Create<Core.Models.User>();
+            var user = _fixture.Create<User>();
             var savedUser = await _userRepository.AddUser(user);
             savedUser.Username.Should().Be(user.Username);
         }
@@ -36,10 +36,10 @@ namespace Casino.ComponentTests
         public async Task UpdateUser_ReturnsCorrectly()
         {
             var user = await _userRepository.GetUser(KnownUsers.User1);
-            user.LuckCoefficient = (decimal) 0.01;
+            user.LuckCoefficient = (decimal)0.01;
             var result = await _userRepository.UpdateUser(user);
 
-            result.LuckCoefficient.Should().Be((decimal) 0.01);
+            result.LuckCoefficient.Should().Be((decimal)0.01);
         }
     }
 }

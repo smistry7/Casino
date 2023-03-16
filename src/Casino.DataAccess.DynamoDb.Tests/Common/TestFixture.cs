@@ -12,6 +12,7 @@ namespace Casino.DataAccess.DynamoDb.Tests.Common
         {
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true)
+                .AddEnvironmentVariables()
                 .Build();
 
             Services = new ServiceCollection()
