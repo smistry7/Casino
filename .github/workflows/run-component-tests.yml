@@ -8,20 +8,36 @@ on:
     branches: [ main ]
 
 jobs:
-  test: 
+  checkout:
     runs-on: ubuntu-latest
     steps:
     - name: checkout code
       uses: actions/checkout@v2
-    
+
+  unit-test: 
+    runs-on: ubuntu-latest
+    steps:
     - name: run unit tests
       run: ./batect run-unit-tests
-    
+    needs: checkout
+
+  sql-test:
+    runs-on: ubuntu-latest
+    steps:
     - name: run sql tests
       run: ./batect run-sql-tests
+    needs: checkout
     
+  dynamodb-test:
+    runs-on: ubuntu-latest
+    steps:
     - name: run dynamodb tests
       run: ./batect run-dynamo-db-tests
+    needs: checkout
 
+  component-test:
+    runs-on: ubuntu-latest
+    steps:
     - name: run component tests
       run: ./batect run-component-tests
+    needs: checkout
