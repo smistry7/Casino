@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Casino.Core.Extensions;
 using Casino.Core.Models;
 
 namespace Casino.Api.Dto
@@ -21,10 +20,7 @@ namespace Casino.Api.Dto
         {
             public UserDtoMapping()
             {
-                CreateMap<UserDto, User>()
-                    .ForMember(x=>x.PasswordHash, opt => opt.MapFrom(src => src.PasswordHash.Encrypt()));
-                CreateMap<User, UserDto>()
-                    .ForMember(x => x.PasswordHash, opt => opt.Ignore());
+                CreateMap<UserDto, User>().ReverseMap();
             }
         }
     }
