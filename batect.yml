@@ -53,7 +53,7 @@ tasks:
     description: run casino app
     run:
       container: dotnet-sdk-container
-      command: sh -c "dotnet dev-certs https --clean && dotnet dev-certs https -t && dotnet run --project ./Casino.Api/Casino.Api.csproj"
+      command: sh -c "dotnet dev-certs https --clean && dotnet dev-certs https -t && dotnet run --project ./Casino.Api/Casino.Api.csproj --no-build"
     dependencies:
       - sql-server-container
       - localstack
