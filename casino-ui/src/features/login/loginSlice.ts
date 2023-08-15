@@ -10,6 +10,7 @@ const initialState: LoginState = {
     username: '',
     password: '',
     isLoggingIn: false
+    
 }
 
 export const loginSlice = createSlice({

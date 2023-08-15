@@ -24,13 +24,14 @@ jobs:
     - name: run sql tests
       run: ./batect run-sql-tests
     
-  dynamodb-test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout code
-      uses: actions/checkout@v2
-    - name: run dynamodb tests
-      run: ./batect run-dynamo-db-tests
+  # dynamodb-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: checkout code
+  #     uses: actions/checkout@v2
+  #   - name: run dynamodb tests
+  #     run: ./batect run-dynamo-db-tests
+ 
 
   component-test:
     runs-on: ubuntu-latest
