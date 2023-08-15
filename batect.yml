@@ -1,4 +1,7 @@
 containers:
+  env:
+    image: nginx:1.17.0-alpine
+
   dotnet-sdk-container:
     image: mcr.microsoft.com/dotnet/sdk:6.0
     ports:
@@ -26,10 +29,10 @@ containers:
     working_directory: /code
     ports:
       - "8123:1433"
-  
+
   redis:
     image: redis
-    ports: 
+    ports:
       - "6001:6001"
 
   localstack:
@@ -45,7 +48,6 @@ containers:
       SERVICES: s3,lambda,dynamodb
       AWS_DEFAULT_REGION: ap-southeast-2
 
-
 tasks:
   run-app:
     description: run casino app
@@ -57,15 +59,24 @@ tasks:
       - localstack
       # - redis
 
+  debug-app:
+    description: debug app
+    run:
+      container: env
+    dependencies:
+      - sql-server-container
+      - localstack
+      - redis
+
   run-unit-tests:
     description: run domain unit tests
-    run: 
+    run:
       container: dotnet-sdk-container
       command: dotnet test ./Casino.UnitTests/Casino.Domain.UnitTests.csproj
 
-  run-component-tests: 
+  run-component-tests:
     description: run component tests
-    run: 
+    run:
       container: dotnet-sdk-container
       command: dotnet test ./Casino.ComponentTests/Casino.ComponentTests.csproj
     dependencies:
@@ -74,7 +85,7 @@ tasks:
 
   run-sql-tests:
     description: run SQL repository tests
-    run: 
+    run:
       container: dotnet-sdk-container
       command: dotnet test ./Casino.DataAccess.Sql.Tests/Casino.DataAccess.Sql.Tests.csproj
     dependencies:
@@ -82,9 +93,8 @@ tasks:
 
   run-dynamo-db-tests:
     description: run DynamoDB repository tests
-    run: 
+    run:
       container: dotnet-sdk-container
       command: dotnet test ./Casino.DataAccess.DynamoDb.Tests/Casino.DataAccess.DynamoDb.Tests.csproj
     dependencies:
       - localstack
-    

@@ -11,7 +11,7 @@ RUN apt-get update \
     && apt-get install unzip -y
 
 
-run wget "https://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u12_amd64.deb" \
+RUN wget "https://archive.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.0.0_1.0.1t-1+deb8u12_amd64.deb" \
     && dpkg --ignore-depends=multiarch-support -i libssl1.0.0_1.0.1t-1+deb8u12_amd64.deb
 
 # Install SQLPackage for Linux and make it executable
