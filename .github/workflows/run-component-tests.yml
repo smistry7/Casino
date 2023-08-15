@@ -29,11 +29,12 @@ jobs:
     steps:
     - name: checkout code
       uses: actions/checkout@v2
-    - name: run dynamodb tests
-      run: ./batect run-dynamo-db-tests
     - name: Dump docker logs on failure
       if: failure()
       uses: jwalton/gh-docker-logs@v2
+    - name: run dynamodb tests
+      run: ./batect run-dynamo-db-tests
+ 
 
   component-test:
     runs-on: ubuntu-latest

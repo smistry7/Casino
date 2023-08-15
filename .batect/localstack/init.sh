@@ -10,3 +10,6 @@ aws dynamodb create-table \
 aws dynamodb batch-write-item \
     --endpoint-url "$LOCALSTACK_URL" \
     --request-items file:///dynamodb/seed-users.json
+
+aws dynamodb list-tables \
+    --endpoint-url "$LOCALSTACK_URL"
